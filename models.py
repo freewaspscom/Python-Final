@@ -1,6 +1,6 @@
 class Product:
     
-    def __init__(self):
+    def __init__(self, productID, name, category, quantity, reorderLevel, reorderQuantity, unitPrice, vendorID, status):
         self.productID = productID
         self.name = name 
         self.category = category
