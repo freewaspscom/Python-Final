@@ -1,2 +1,4 @@
 class Lists:
-    productsList = []
+    products = []
+    vendors = []
+    orders = []
