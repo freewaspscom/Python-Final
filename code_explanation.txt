@@ -1,0 +1,14 @@
+1.
+Products are stored as objects, and their data is stored as attributes. Those objects are then stored in an array. The objects have a function to convert them to a dictionary for saving.
+
+2.
+Purchase orders search through the arrays of products and vendors. The user is able to add any product or vendor that the program has stored.
+
+3.
+It searches through the products listed in the order, and then adds the amount ordered to the product.
+
+4.
+Each category of object is saved to its own JSON file. Within each file, the items are in an array. The load feature takes them out of that array and puts them into the main array used by the program.
+
+5.
+While it was not a difficult bug to fix, I did find this one pretty funny. I somehow managed to make a typo every time I typed the orders list, and every occurence was instead put as "sorted". I have no idea how I managed to make that typo several times, but it was funny when I relized it.
