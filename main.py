@@ -1,68 +1,14 @@
 from models import *
 from inventory_manager import *
 from lists import Lists
+from file_manager import *
+import json
+
 
 
 # Variables go here
 listGroup = Lists()
 lowStock = 30
-
-
-# Temporary functions location while I work on making it work elsewhere
-def searchProducts(search):
-    for i in range(len(listGroup.products)):
-        if search == listGroup.products[i].name:
-            print("Product found!")
-            return i
-    else:
-        print("Product not found.")
-
-
-def removeProduct():
-    search = input("Enter the product name...\n> ")
-    productItem = searchProducts(search)
-    listGroup.products.pop(productItem)
-
-
-def orderProducts():
-    orderList = {}
-    while True:
-        print('Type "Done" to finish adding items.')
-        search = input("Enter the product name...\n> ")
-        if search.lower() != "done":
-            i = searchProducts(search)
-            orderList["Name"] = listGroup.products[i].name
-            orderList["Cost"] = listGroup.products[i].unitPrice
-        else:
-            break
-
-
-
-def displayLowStock():
-    for i in range(len(listGroup.products)):
-        if listGroup.products[i].quantity <= 30:
-            print(f"{listGroup.products[i].name}\n{listGroup.products[i].quantity} left")
-
-
-def searchVendors():
-    search = input("Enter the vendor name...\n> ")
-    for i in range(len(listGroup.vendors)):
-        if search == listGroup.vendors[i].vendorName:
-            print("Vendor found!")
-            return i
-    else:
-        print("Vendor not found.")
-
-
-def removeVendor():
-    search = input("Enter the vendor name...\n> ")
-    vendorItem = searchVendors()
-    listGroup.vendors.pop(vendorItem)
-
-
-def vendorSelector():
-    searchVendors()
-    return listGroup.vendors[i].vendorID
 
 
 
@@ -72,7 +18,7 @@ def vendorSelector():
 while True:
     print("Product Manager")
     print("Which would you like to use?")
-    print("1. Product Management\n2. Vendor Management\n3. Purchase Order System\n4. Shipment Recieving\n5. Search\n6. Sort\n7. Report\nSave and Load\n8. Exit")
+    print("1. Product Management\n2. Vendor Management\n3. Purchase Order System\n4. Shipment Recieving\n5. Search\n6. Sort\n7. Report\n8. Save and Load\n9. Exit")
     selection = input("> ")
     
     
@@ -89,7 +35,17 @@ while True:
 
 
             if selection == "1":
-                newProduct = Product()
+                productID = input("What is the ID of the product?\n> ").strip()
+                name = input("What is the name of the product?\n> ").strip()
+                category = input("What category is the product?\n> ").strip()
+                quantity = int(input("How many of this product are being ordered?\n> ").strip())
+                reorderLevel = int(input("How many do you want in stock?\n> ").strip())
+                reorderQuantity = reorderLevel - quantity
+                unitPrice = int(input("What is the price of each individual item?\n> ").strip())
+                vendorID = input("What is the ID of the vendor?\n> ").strip()
+                status = input("What is the status of the product?\n> ").strip()
+                productItems = [productID, name, category, quantity, reorderLevel, reorderQuantity, unitPrice, vendorID, status]
+                newProduct = Product(productItems)
                 listGroup.products.append(newProduct)
                 print("Product successfully added!")
 
@@ -99,13 +55,13 @@ while True:
 
             elif selection == "3":
                 search = input("Enter the product name...\n> ")
-                searchProducts(search)
+                searchProducts(search, listGroup)
 
             elif selection == "4":
-                removeProduct()
+                removeProduct(listGroup)
 
             elif selection == "5":
-                displayLowStock()
+                displayLowStock(listGroup, lowStock)
 
             elif selection == "6":
                 break
@@ -128,7 +84,14 @@ while True:
 
 
             if selection == "1":
-                newVendor = Vendor()
+                vendorID = input("What is the ID of the vendor?\n> ").strip()
+                vendorName = input("What is the name of the vendor?\n> ").strip()
+                contactName = input("What is the contact name of the vendor?\n> ").strip()
+                phoneNumber = input("What is the phone number of the vendor?\n> ").strip()
+                email = input("What is the email of the vendor?\n> ").strip()
+                address = input("What is the address of the vendor?\n> ").strip()
+                vendorItems[vendorID, vendorName, contactName, phoneNumber, email, address]
+                newVendor = Vendor(vendorItems)
                 listGroup.vendors.append(newVendor)
                 print("Vendor successfully added!")
 
@@ -137,10 +100,11 @@ while True:
                     print(listGroup.vendors[i].vendorName)
 
             elif selection == "3":
-                searchVendors()
+                search = input("Enter the vendor name...\n> ")
+                searchVendors(search, listGroup)
 
             elif selection == "4":
-                removeVendor()
+                removeVendor(listGroup)
 
             elif selection == "5":
                 break
@@ -157,22 +121,30 @@ while True:
     elif selection == "3":
         while True:
             print("Purchase Ordering")
-            print("1. Create an Order\n2.View Existing Orders\n3.Mark Order as Recieved\n4. Back to Main Menu")
+            print("1. Create an Order\n2.View Active Orders\n3.Mark Order as Recieved\n4. Back to Main Menu")
             selection = input("> ")
 
 
 
             if selection == "1":
-                newOrder = PurchaseOrder()
+                numberPO = input("What is the PO number?\n> ").strip()
+                vendorID = vendorSelector()
+                dateCreated = input("What is the date the order started?\n> ").strip()
+                itemsOrdered = orderProducts()
+                quantityOrdered = len(itemsOrdered)
+                totalCost = input("What was the total cost?\n> ").strip()
+                orderItems = [numberPO, vendorID, dateCreated, itemsOrdered, quantityOrdered, totalCost]
+                newOrder = PurchaseOrder(orderItems)
                 listGroup.orders.append(newOrder)
                 print("Vendor successfully added!")
 
             elif selection == "2":
                 for i in range(len(listGroup.orders)):
-                    print(listGroup.orders[i].itemsOrdered)
+                    if listGroup.sort[i].status != "Delievered":
+                        print(listGroup.orders[i].itemsOrdered)
 
             elif selection == "3":
-                searchVendors()
+                markRecieved(listGroup)
 
             elif selection == "4":
                 break
@@ -184,6 +156,17 @@ while True:
 
 
 
+
+    # Save and load
+    elif selection == "8":
+        print("1. Save\n2. Load")
+        selection = input("> ")
+        if selection == "1":
+            saveToFile(listGroup)
+        elif selection == "2":
+            loadFromFile(listGroup)
+        else:
+            print("That is not a valid option. Please try again.")
 
 
 

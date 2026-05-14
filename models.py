@@ -1,16 +1,19 @@
 class Product:
     
-    def __init__(self):
-        self.productID = input("What is the ID of the product?\n> ").strip()
-        self.name = input("What is the name of the product?\n> ").strip()
-        self.category = input("What category is the product?\n> ").strip()
-        self.quantity = int(input("How many of this product are being ordered?\n> ").strip())
-        self.reorderLevel = int(input("How many do you want in stock?\n> ").strip())
-        self.reorderQuantity = 5 # Replace this with reorderLevel - quantity
-        self.unitPrice = int(input("What is the price of each individual item?\n> ").strip())
-        self.vendorID = input("What is the ID of the vendor?\n> ").strip()
-        self.status = input("What is the status of the product?\n> ").strip()
-        self.content = {
+    def __init__(self, productItems):
+        self.productID = productItems[0]
+        self.name = productItems[1]
+        self.category = productItems[2]
+        self.quantity = productItems[3]
+        self.reorderLevel = productItems[4]
+        self.reorderQuantity = productItems[5]
+        self.unitPrice = productItems[6]
+        self.vendorID = productItems[7]
+        self.status = productItems[8]
+    
+
+    def convertToDictionary(self):
+        storedProduct =     {
             "productID": self.productID,
             "name": self.name,
             "category": self.category,
@@ -21,24 +24,58 @@ class Product:
             "vendorID": self.vendorID,
             "status": self.status,
         }
+        return storedProduct
+
+
+
+
+
 
 class Vendor:
 
-    def __init__(self):
-        self.vendorID = input("What is the ID of the vendor?\n> ").strip()
-        self.vendorName = input("What is the name of the vendor?\n> ").strip()
-        self.contactName = input("What is the contact name of the vendor?\n> ").strip()
-        self.phoneNumber = input("What is the phone number of the vendor?\n> ").strip()
-        self.email = input("What is the email of the vendor?\n> ").strip()
-        self.address = input("What is the address of the vendor?\n> ").strip()
+    def __init__(self, vendorItems):
+        self.vendorID = vendorItems[0]
+        self.vendorName = vendorItems[1]
+        self.contactName = vendorItems[2]
+        self.phoneNumber = vendorItems[3]
+        self.email = vendorItems[4]
+        self.address =vendorItems[5]
+
+
+    def convertToDictionary(self):
+        storedVendor =     {
+            "vendorID": self.vendorID,
+            "vendorName": self.vendorName,
+            "contactName": self.contactName,
+            "phoneNumber": self.phoneNumber,
+            "email": self.email,
+            "address": self.address,
+        }
+        return storedVendor
+
+
+
 
 class PurchaseOrder:
     
-    def __init__(self):
-        self.NumberPO = input("What is the PO number?\n> ").strip()
-        self.vendorID = vendorSelector()
-        self.dateCreated = input("What is the date the order started?\n> ").strip()
-        self.itemsOrdered = orderProducts()
-        self.quantityOrdered = len(itemsOrdered)
-        self.totalCost = input("What was the total cost?\n> ").strip()
-        self.status = input("What is the status?\n> ").strip()
+    def __init__(self, orderItems):
+        self.numberPO = orderItems[0]
+        self.vendorID = orderItems[1]
+        self.dateCreated = orderItems[2]
+        self.itemsOrdered = orderItems[3]
+        self.quantityOrdered = orderItems[4]
+        self.totalCost = orderItems[5]
+        self.status = "Ordered"
+    
+
+    def convertToDictionary(self):
+        storedVendor =     {
+            "numberPO": self.numberPO,
+            "vendorID": self.vendorID,
+            "dateCreated": self.dateCreated,
+            "itemsOrdered": self.itemsOrdered,
+            "quantityOrdered": self.quantityOrdered,
+            "totalCost": self.totalCost,
+            "status": self.status,
+        }
+        return storedVendor
