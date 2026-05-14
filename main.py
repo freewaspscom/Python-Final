@@ -30,7 +30,7 @@ while True:
     if selection == "1":
         while True:
             print("Product Management")
-            print("1. Add a Product\n2. View All Products\n3. Search for a Product\n4. Sort by Category\n5. Deactivate a Product\n6. Display Low-Stock Products\n7. Back to Main Menu")
+            print("1. Add a Product\n2. View All Products\n3. Search for a Product Name\n4. Search for a Product Category\n5. Sort by Category\n6. Deactivate a Product\n7. Display Low-Stock Products\n8. Back to Main Menu")
             selection = input("> ")
 
 
@@ -42,7 +42,7 @@ while True:
                 quantity = int(input("How many of this product are being ordered?\n> ").strip())
                 reorderLevel = int(input("How many do you want in stock?\n> ").strip())
                 reorderQuantity = reorderLevel - quantity
-                unitPrice = int(input("What is the price of each individual item?\n> ").strip())
+                unitPrice = float(input("What is the price of each individual item?\n> ").strip())
                 vendorID = input("What is the ID of the vendor?\n> ").strip()
                 status = input("What is the status of the product?\n> ").strip()
                 productItems = [productID, name, category, quantity, reorderLevel, reorderQuantity, unitPrice, vendorID, status]
@@ -59,19 +59,23 @@ while True:
                 searchProducts(search, listGroup)
 
             elif selection == "4":
+                search = input("Enter the product category...\n> ")
+                searchProductCategories(search, listGroup)
+
+
+            elif selection == "5":
                 sortedProducts = sorted(listGroup.products, key=lambda x: x.category)
                 for i in range(len(sortedProducts)):
                     print(listGroup.products[i].name)
 
 
-
-            elif selection == "5":
+            elif selection == "6":
                 removeProduct(listGroup)
 
-            elif selection == "6":
+            elif selection == "7":
                 displayLowStock(listGroup, lowStock)
 
-            elif selection == "7":
+            elif selection == "8":
                 break
 
             else:
@@ -86,7 +90,7 @@ while True:
     elif selection == "2":
         while True:
             print("Vendor Management")
-            print("1. Add a Vendor\n2. View All Vendors\n3. Search for a Vendor\n4. Deactivate a Vendor\n5. Back to Main Menu")
+            print("1. Add a Vendor\n2. View All Vendors\n3. Search for a Vendor\n4. Deactivate a Vendor\n5. Sort by Vendor Name\n6. Back to Main Menu")
             selection = input("> ")
 
 
@@ -109,12 +113,17 @@ while True:
 
             elif selection == "3":
                 search = input("Enter the vendor name...\n> ")
-                searchVendors(search, listGroup)
+                searchVendors(listGroup, search)
 
             elif selection == "4":
                 removeVendor(listGroup)
-
+            
             elif selection == "5":
+                sortedVendors = sorted(listGroup.vendors, key=lambda x: x.vendorName)
+                for i in range(len(sortedVendors)):
+                    print(listGroup.vendors[i].vendorName)
+
+            elif selection == "6":
                 break
 
             else:
@@ -129,7 +138,7 @@ while True:
     elif selection == "3":
         while True:
             print("Purchase Ordering")
-            print("1. Create an Order\n2.View Active Orders\n3.Mark Order as Recieved\n4. Back to Main Menu")
+            print("1. Create an Order\n2.View Active Orders\n3.Mark Order as Recieved\n4. Sort by Cost\n5. Back to Main Menu")
             selection = input("> ")
 
 
@@ -139,26 +148,36 @@ while True:
                 vendorID = vendorSelector(listGroup)
                 dateCreated = input("What is the date the order started?\n> ").strip()
                 itemsOrdered = orderProducts(listGroup)
-                quantityOrdered = len(itemsOrdered)
-                totalCost = input("What was the total cost?\n> ").strip()
+                quantityOrdered = calculateQuantity(itemsOrdered)
+                totalCost = calculateTotal(itemsOrdered)
                 orderItems = [numberPO, vendorID, dateCreated, itemsOrdered, quantityOrdered, totalCost]
                 newOrder = PurchaseOrder(orderItems)
                 listGroup.orders.append(newOrder)
-                print("Vendor successfully added!")
+                print("Order placed!")
 
             elif selection == "2":
                 for i in range(len(listGroup.orders)):
-                    if listGroup.sort[i].status != "Delievered":
+                    if listGroup.orders[i].status != "Delievered":
                         print(listGroup.orders[i].itemsOrdered)
 
             elif selection == "3":
                 markRecieved(listGroup)
-
+            
             elif selection == "4":
+                sortedOrders = sorted(listGroup.orders, key=lambda x: x.totalCost)
+                for i in range(len(sortedOrders)):
+                    print(listGroup.orders[i].totalCost)
+
+            elif selection == "5":
                 break
 
             else:
                 print("That is not a valid option. Please try again.")
+
+
+
+
+
 
 
 
@@ -190,6 +209,19 @@ while True:
                 print("That is not a valid option. Please try again.")   
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     # Save and load -----------------------------------------------------------------------------------------------------------------------------------------------------------------
     elif selection == "5":
         print("1. Save\n2. Load\nNote: Load data before saving to avoid data loss.")
@@ -200,18 +232,6 @@ while True:
             loadFromFile(listGroup)
         else:
             print("That is not a valid option. Please try again.")
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
