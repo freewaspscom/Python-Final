@@ -2,6 +2,7 @@ from models import *
 from inventory_manager import *
 from lists import Lists
 from file_manager import *
+from reports import *
 import json
 
 
@@ -18,7 +19,7 @@ lowStock = 30
 while True:
     print("Product Manager")
     print("Which would you like to use?")
-    print("1. Product Management\n2. Vendor Management\n3. Purchase Order System\n4. Shipment Recieving\n5. Search\n6. Sort\n7. Report\n8. Save and Load\n9. Exit")
+    print("1. Product Management\n2. Vendor Management\n3. Purchase Order System\n4. Create Report\n5. Save and Load\n6. Exit")
     selection = input("> ")
     
     
@@ -29,7 +30,7 @@ while True:
     if selection == "1":
         while True:
             print("Product Management")
-            print("1. Add a Product\n2. View All Products\n3. Search for a Product\n4. Deactivate a Product\n5. Display Low-Stock Products\n6. Back to Main Menu")
+            print("1. Add a Product\n2. View All Products\n3. Search for a Product\n4. Sort by Category\n5. Deactivate a Product\n6. Display Low-Stock Products\n7. Back to Main Menu")
             selection = input("> ")
 
 
@@ -58,12 +59,19 @@ while True:
                 searchProducts(search, listGroup)
 
             elif selection == "4":
-                removeProduct(listGroup)
+                sortedProducts = sorted(listGroup.products, key=lambda x: x.category)
+                for i in range(len(sortedProducts)):
+                    print(listGroup.products[i].name)
+
+
 
             elif selection == "5":
-                displayLowStock(listGroup, lowStock)
+                removeProduct(listGroup)
 
             elif selection == "6":
+                displayLowStock(listGroup, lowStock)
+
+            elif selection == "7":
                 break
 
             else:
@@ -90,7 +98,7 @@ while True:
                 phoneNumber = input("What is the phone number of the vendor?\n> ").strip()
                 email = input("What is the email of the vendor?\n> ").strip()
                 address = input("What is the address of the vendor?\n> ").strip()
-                vendorItems[vendorID, vendorName, contactName, phoneNumber, email, address]
+                vendorItems = [vendorID, vendorName, contactName, phoneNumber, email, address]
                 newVendor = Vendor(vendorItems)
                 listGroup.vendors.append(newVendor)
                 print("Vendor successfully added!")
@@ -127,10 +135,10 @@ while True:
 
 
             if selection == "1":
-                numberPO = input("What is the PO number?\n> ").strip()
-                vendorID = vendorSelector()
+                numberPO = input("What is the order number?\n> ").strip()
+                vendorID = vendorSelector(listGroup)
                 dateCreated = input("What is the date the order started?\n> ").strip()
-                itemsOrdered = orderProducts()
+                itemsOrdered = orderProducts(listGroup)
                 quantityOrdered = len(itemsOrdered)
                 totalCost = input("What was the total cost?\n> ").strip()
                 orderItems = [numberPO, vendorID, dateCreated, itemsOrdered, quantityOrdered, totalCost]
@@ -157,9 +165,34 @@ while True:
 
 
 
-    # Save and load
-    elif selection == "8":
-        print("1. Save\n2. Load")
+
+    # Reports----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    elif selection == "4":
+        while True:
+            print("1. Full Report\n2. Low Stock Report\n3. Total Inventory Value\n4. Exit")
+            selection = input("> ")
+
+
+
+            if selection == "1":
+                fullReport(listGroup)
+
+            elif selection == "2":
+                lowStockReport(listGroup, lowStock)
+
+            elif selection == "3":
+                totalInventoryValue(listGroup)
+
+            elif selection == "4":
+                break
+
+            else:
+                print("That is not a valid option. Please try again.")   
+
+
+    # Save and load -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    elif selection == "5":
+        print("1. Save\n2. Load\nNote: Load data before saving to avoid data loss.")
         selection = input("> ")
         if selection == "1":
             saveToFile(listGroup)
@@ -191,7 +224,9 @@ while True:
 
 
 
-
+    elif selection == "6":
+        print("Exiting program...")
+        break
 
     else:
         print("That is not a valid option. Please try again.")

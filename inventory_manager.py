@@ -25,7 +25,7 @@ def orderProducts(listGroup): # Allows the user to order as many products as the
         print('Type "Done" to finish adding items.')
         search = input("Enter the product name...\n> ")
         if search.lower() != "done":
-            i = searchProducts(search)
+            i = searchProducts(search, listGroup)
             orderList["Name"] = listGroup.products[i].name
             orderList["Cost"] = listGroup.products[i].unitPrice
         else:
@@ -39,7 +39,7 @@ def displayLowStock(listGroup, lowStock):
             print(f"{listGroup.products[i].name}\n{listGroup.products[i].quantity} left")
 
 
-def searchVendors(search):
+def searchVendors(listGroup, search):
     for i in range(len(listGroup.vendors)):
         if search == listGroup.vendors[i].vendorName:
             print("Vendor found!")
@@ -56,7 +56,7 @@ def removeVendor(listGroup):
 
 def vendorSelector(listGroup):
     search = input("Enter the vendor name...\n> ")
-    searchVendors(search)
+    i = searchVendors(listGroup, search)
     return listGroup.vendors[i].vendorID
 
 
