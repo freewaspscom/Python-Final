@@ -1,0 +1,162 @@
+[
+    {
+        "numberPO": "8946",
+        "vendorID": "1868",
+        "dateCreated": "14 May 2026",
+        "itemsOrdered": [
+            {
+                "name": "Ink cartridges",
+                "cost": 40.0,
+                "reorderQuantity": 3
+            },
+            {
+                "name": "Ballpoint pens",
+                "cost": 10.0,
+                "reorderQuantity": 10
+            }
+        ],
+        "quantityOrdered": 13,
+        "totalCost": 220.0,
+        "status": "Ordered"
+    },
+    {
+        "numberPO": "2350",
+        "vendorID": "4358",
+        "dateCreated": "12 May 2026",
+        "itemsOrdered": [
+            {
+                "name": "Mop",
+                "cost": 20.0,
+                "reorderQuantity": 8
+            },
+            {
+                "name": "Window spray",
+                "cost": 5.0,
+                "reorderQuantity": 10
+            }
+        ],
+        "quantityOrdered": 18,
+        "totalCost": 210.0,
+        "status": "Ordered"
+    },
+    {
+        "numberPO": "7562",
+        "vendorID": "4563",
+        "dateCreated": "Paper cups",
+        "itemsOrdered": [
+            {
+                "name": "Water jug",
+                "cost": 25.0,
+                "reorderQuantity": 7
+            }
+        ],
+        "quantityOrdered": 7,
+        "totalCost": 175.0,
+        "status": "Ordered"
+    },
+    {
+        "numberPO": "4589",
+        "vendorID": "7536",
+        "dateCreated": "6 May 2026",
+        "itemsOrdered": [
+            {
+                "name": "Computer",
+                "cost": 300.0,
+                "reorderQuantity": 30
+            },
+            {
+                "name": "Desk mat",
+                "cost": 15.0,
+                "reorderQuantity": 30
+            },
+            {
+                "name": "Monitor",
+                "cost": 150.0,
+                "reorderQuantity": 60
+            }
+        ],
+        "quantityOrdered": 120,
+        "totalCost": 18450.0,
+        "status": "Ordered"
+    },
+    {
+        "numberPO": "4587",
+        "vendorID": "1868",
+        "dateCreated": "28 April 2026",
+        "itemsOrdered": [
+            {
+                "name": "Tape",
+                "cost": 5.0,
+                "reorderQuantity": 20
+            },
+            {
+                "name": "Binder clips",
+                "cost": 5.0,
+                "reorderQuantity": 50
+            },
+            {
+                "name": "Envelopes",
+                "cost": 10.0,
+                "reorderQuantity": 50
+            }
+        ],
+        "quantityOrdered": 120,
+        "totalCost": 850.0,
+        "status": "Ordered"
+    },
+    {
+        "numberPO": "2458",
+        "vendorID": "1868",
+        "dateCreated": "4 May 2026",
+        "itemsOrdered": [
+            {
+                "name": "Sticky notes",
+                "cost": 5.0,
+                "reorderQuantity": 50
+            },
+            {
+                "name": "Hole puncher",
+                "cost": 10.0,
+                "reorderQuantity": 26
+            },
+            {
+                "name": "Binder",
+                "cost": 15.0,
+                "reorderQuantity": 20
+            }
+        ],
+        "quantityOrdered": 96,
+        "totalCost": 810.0,
+        "status": "Ordered"
+    },
+    {
+        "numberPO": "6278",
+        "vendorID": "0683",
+        "dateCreated": "chairs",
+        "itemsOrdered": [
+            {
+                "name": "Chairs",
+                "cost": 35.0,
+                "reorderQuantity": 60
+            }
+        ],
+        "quantityOrdered": 60,
+        "totalCost": 2100.0,
+        "status": "Ordered"
+    },
+    {
+        "numberPO": "8764",
+        "vendorID": "0298",
+        "dateCreated": "10 May 2026",
+        "itemsOrdered": [
+            {
+                "name": "Snacks",
+                "cost": 10.0,
+                "reorderQuantity": 5
+            }
+        ],
+        "quantityOrdered": 5,
+        "totalCost": 50.0,
+        "status": "Ordered"
+    }
+]

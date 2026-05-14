@@ -1,0 +1,50 @@
+[
+    {
+        "vendorID": "1868",
+        "vendorName": "Office World",
+        "contactName": "Jim Dobers",
+        "phoneNumber": "(217) 356-2355",
+        "email": "hello@officeworld.com",
+        "address": "457 E. 5th St., Decatur, IL"
+    },
+    {
+        "vendorID": "0683",
+        "vendorName": "Comfortable Life",
+        "contactName": "Lucy Graham",
+        "phoneNumber": "(217) 465-2342",
+        "email": "lgraham@comfortablelife.com",
+        "address": "126 N. Wanlnut St., Arcola, IL"
+    },
+    {
+        "vendorID": "7536",
+        "vendorName": "Even Better Buy",
+        "contactName": "Larry Smith",
+        "phoneNumber": "(217) 486-6502",
+        "email": "larrys@evenbetterbuy.com",
+        "address": "457 E. Prospect Ave., Champaign, IL"
+    },
+    {
+        "vendorID": "0298",
+        "vendorName": "Hungry Hammock",
+        "contactName": "Jane Dough",
+        "phoneNumber": "(217) 795-8093",
+        "email": "eatup@hungryhammock.com",
+        "address": "464 S. 3rd St., Charleston, IL"
+    },
+    {
+        "vendorID": "4563",
+        "vendorName": "Fresh And Cool",
+        "contactName": "Jack Jackson",
+        "phoneNumber": "(217) 547-9084",
+        "email": "jjackson@freshandcool.com",
+        "address": "455 W. Maple St., Effingham, IL"
+    },
+    {
+        "vendorID": "4358",
+        "vendorName": "Clean Clams",
+        "contactName": "Jon A. Than",
+        "phoneNumber": "(217) 356-3245",
+        "email": "jthan@cleanclams.com",
+        "address": "245 W. Ash St., Peoria, IL"
+    }
+]
