@@ -11,7 +11,6 @@ def saveToFile(listGroup):
         newProduct = listGroup.products[i].convertToDictionary()
 
         productList.append(newProduct)
-        print(productList)
     jsonStr = json.dumps(productList, indent=4)
     with open("products.json", "a") as f:
         f.write(jsonStr)
